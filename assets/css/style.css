@@ -1,7 +1,32 @@
 * {
 	box-sizing: border-box;
+	color: white;
+}
+html {
+	
+	
 }
 
 body {
-	font-family: 'Segoe UI',Arial, sans-serif;
+	font-family: 'Lato', sans-serif;
+	background: black;
+	background-image: url('../images/moon_astronauts_2001.jpg');
+	/*background-image: url('../images/2001_station.jpg');*/
+  	background-repeat: no-repeat;
+  	background-size: 100%;
+  	background-attachment: fixed;
+  	background-position: 0% 100%;
 }
+.title-block {
+	margin-top: 7%;
+	margin-bottom: 7%;
+}
+.h1 {
+    font-size: 60px;
+    word-spacing: 22px;
+   
+}
+.h3 {
+	font-variant: small-caps;
+}
+
