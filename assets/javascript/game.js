@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(newWord);
 			gameObject.currentWord = newWord;
 			gameObject.remainingLetters = gameObject.splitWord(newWord);
+			//One time write to DOM using underscores to show word length
+			const underscores = [];
+			gameObject.remainingLetters.map((_,i) => {underscores.push("_")});
+			// console.log(underscores);
+			writeToDOM(underscores, 'correctGuess');
+
 		}
 		else {
 			gameOn = false;
@@ -45,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const incorrectGuess = (inputLetter) => {
 		gameObject.guessesRemaining--;
+		document.getElementById('guessesRemaining').innerHTML = gameObject.guessesRemaining;
 		gameObject.guessedLetters.push(inputLetter);
 		console.log(gameObject.guessesRemaining);
 		splitGuessedLetters();
@@ -54,31 +61,36 @@ document.addEventListener('DOMContentLoaded', () => {
 		const index = gameObject.remainingLetters.indexOf(inputLetter);
 		gameObject.guessedLetters.push(gameObject.remainingLetters.splice(index,1).toString());
 		if (gameObject.remainingLetters.length < 1) {wordWin();}
-		splitGuessedLetters();
+		else splitGuessedLetters();
 	}
 
 	const wordWin = () => {
 		gameObject.winBank.push(gameObject.currentWord);
 		console.log(gameObject.winBank);
 		gameObject.guessedLetters = [];
+		document.getElementById('score').innerHTML = gameObject.winBank.length;
 		randomSelectNextWord();
 	}
 	const testFunctionPartDeux = function () {
 		this.testNumber += 10;
-		console.log()
+		console.log("partdeux", this.testFunction);
 	}
 
 
 	const splitGuessedLetters = () => {
-		const splitWordArray = splitWord(gameObject.currentWord);
+		//Reperesents the current word split by character
+		const splitWordArray = splitWord(gameObject.currentWord); 
 		let correctGuessArray = [];
 		let incorrectGuessArray = [];
 		gameObject.guessedLetters.map((x,i) => {
 			let match = false;
-			splitWordArray.map((y, j) => {
+			splitWordArray.map((y, j) => { 
 				if (x == y) {
 				correctGuessArray[j] = x; //Write the value 
 				match = true;
+				}
+				else {
+					correctGuessArray[j] = '_'
 				}
 			});
 			if (match == false) {
@@ -87,7 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		});
 
-		writeToDOM(correctGuessArray, incorrectGuessArray);
+		gameObject.writeToDOM(correctGuessArray, 'correctGuess');
+		gameObject.writeToDOM(incorrectGuessArray, 'incorrectGuess');
 		console.table({correctGuessArray,
 						incorrectGuessArray,
 						remainingLetters: gameObject.remainingLetters,
@@ -95,15 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	const writeToDOM = (correctGuessArray, incorrectGuessArray) => {
-		let correctGuessElement = document.getElementById('correctGuess');
-		let incorrectGuessElement = document.getElementById('incorrectGuess');
-		console.log(correctGuessElement);
+	const writeToDOM = (arraytoWrite, elementId) => {
+		let elementToWriteTo = document.getElementById(elementId.toString());
 		// correctGuessElement.innerHTML = '';
-		while (correctGuessElement.firstChild) {
-			correctGuessElement.removeChild(correctGuessElement.firstChild);
+		while (elementToWriteTo.firstChild) {
+			elementToWriteTo.removeChild(elementToWriteTo.firstChild);
 		}
-		console.log(correctGuessElement);
+		var newElement;
+		var fragment = document.createDocumentFragment();
+			arraytoWrite.map((x,i) => {
+				newElement = document.createElement('li');
+				newElement.innerHTML = x;
+				fragment.appendChild(newElement);
+
+
+			});
+		elementToWriteTo.appendChild(fragment);
 
 	}
 
@@ -116,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		gameObject.wordWin = wordWin;
 		gameObject.writeToDOM = writeToDOM;
 		gameObject.splitGuessedLetters = splitGuessedLetters;
+		gameObject.writeToDOM = writeToDOM;
 		
 		gameObject.wordBank = ["word1","word2","woord3"];
 		gameObject.winBank = [];
@@ -150,8 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('Restarted');
 		}
 	});
-	gameObject.testFunctionTres();
+	// gameObject.testFunctionTres();
 	// gameObject.testFunction();
 	// gameObject.testFunctionPartDeux();
+
+	// gameObject.writeToDOM(gameObject.remainingLetters, 'incorrectGuess')
 
 }); //DOMContentLoaded

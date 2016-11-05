@@ -30,3 +30,9 @@ body {
 	font-variant: small-caps;
 }
 
+@media screen and (max-width: 768px) {
+	.h1 {
+		font-size: 38px;
+		word-spacing: 9px;
+	}
+}
