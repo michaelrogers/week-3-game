@@ -87,12 +87,14 @@ body {
 	padding-bottom: 6px;
 	padding-right: 2px;
 	background: rgb(70, 173, 206);
+	width: 50%;
 }
 
 .numberTextBlock {
 	padding-top: 6px;
 	padding-bottom: 6px;
 	padding-left: 2px;
+	width: 50%;
 }
 
 .textBlockWrapper {

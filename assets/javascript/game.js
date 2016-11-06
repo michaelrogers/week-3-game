@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		self.splitGuessedLetters = splitGuessedLetters;
 		self.writeToDOM = writeToDOM;
 		
-		self.wordBank = ["dave bowman","hal 9000","daisy","kubrick","dawn of man", "clarke", "black monolith", "discovery one", "blue danube waltz"];
+		self.wordBank = ["dave bowman","hal 9000","daisy","kubrick","dawn of man", "arthur c clarke", "black monolith", "discovery one", "blue danube waltz"];
 		self.winBank = [];
 		self.currentWord = "";
 		self.remainingLetters = [];
