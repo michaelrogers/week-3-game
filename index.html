@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>2OO1: A SPACE GLOSSARY</title>
+	<title>2001: A SPACE GLOSSARY</title>
 	<script src="assets/javascript/game.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -13,14 +13,12 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="container contentWrapper">
 		<div class="row title-block">
 			<div class="col-md-12"><h1 class="h1 text-center">2OO1: A  SPACE  GLOSSARY</h1></div>
-			<div class="col-md-12"><p id="subtext" class="text-center">Press any key to get started</p></div>
+			<div class="col-md-12"><p id="subtext" class="text-center">Press any key to get started. Each time you guess a word correctly, you get 2 extra guesses.</p></div>
 		</div>
-		<div class="row">
-			
-		</div>
+		
 		<div class="row">
 			<div class="col-md-6">
 				<h3 class="h3 text-center">
@@ -29,7 +27,7 @@
 			</div>
 			<div class="col-md-6">
 				<h3 class="h3 text-center">
-					Remaining Guesses: <span id="guessesRemaining">15</span>
+					Remaining Guesses: <span id="guessesRemaining">10</span>
 				</h3>
 			</div>
 		</div>
@@ -37,28 +35,42 @@
 			<div class="col-md-12">
 				<div id="wordToGuess">
 					<h2 class="h2">
-						<ul class="list-inline text-center" id="correctGuess">
-							<li>f</li>
-							<li>f</li>
-							<li style="border: transparent 4px solid; border-bottom: 4px solid white; color: transparent;">_</li>
-							<li>f</li>
-							<li>_</li>
-							<li>f</li>
-						</ul>
+						<ul class="list-inline text-center" id="correctGuess"></ul>
 					</h2>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div id="guessedLetters">
-					<h4 class="h4">
-						<ul class="list-inline text-center" id="incorrectGuess">
-							
-						</ul>
+					<h3 class="h3">
+						<ul class="list-inline text-center" id="incorrectGuess"></ul>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div id="guessedWords">
+					<h4 class="h4 text-center">
+						Guessed Words:
+						<ul class="list-inline text-center" id="wordBank"></ul>
 					</h4>
 				</div>
 			</div>
-
+			<div class="col-md-2"></div>
 		</div>
 	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-xs-2"></div>
+				<div class="col-md-6 col-xs-8">
+					<iframe width="100%" height="20" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/77315791&amp;color='0066cc'&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>
+				</div>
+				
+				<div class="col-md-3 col-sm-2"><div id="soundElement"></div></div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
