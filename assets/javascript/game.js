@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		randomSelectNextWord();
 		selectRandomAudio([audioWhatDoing, audioQuestion, audioStressPill]);
 	}
-	
+
 	const splitGuessedLetters = () => {
 		//Reperesents the current word split by character
 		const splitWordArray = splitWord(gameObject.currentWord); 
@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		self.guessesRemaining = 10;
 		self.correctGuessArray = [];
 		self.incorrectGuessArray = [];
-
 	}
 
 	const init = () => {
