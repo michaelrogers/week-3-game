@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	let gameOn = true;
 	let audioHumanError = new Audio('http://www.moviesoundclips.net/movies1/hal/hmnerror.mp3');
-	let audioHumanError2 = new Audio('http://www.moviesoundclips.net/movies1/hal/humanerr.mp3')
+	let audioHumanError2 = new Audio('http://www.moviesoundclips.net/movies1/hal/humanerr.mp3');
 	let audioEnthusiasm = new Audio('http://www.moviesoundclips.net/movies1/hal/enthusiasm.mp3');
 	let audioWhatDoing = new Audio('http://www.moviesoundclips.net/movies1/hal/justwhat.mp3');
 	let audioQuestion = new Audio('http://www.moviesoundclips.net/movies1/hal/2001.mp3');
@@ -29,16 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const selectRandomAudio = (audioArray) => {
-		audioArray[Math.floor(Math.random()*audioArray.length)].play();
+		thisAudio = audioArray[Math.floor(Math.random()*audioArray.length)]
+		thisAudio.volume = 0.2;
+		thisAudio.play();
 	}
 
 	const doesLetterMatch = (inputLetter) => {
 		if (gameObject.guessedLetters.indexOf(inputLetter) == -1) {
 			let letterMatch = false;
 			gameObject.currentWord.split("").map((x) => {
-				if (inputLetter == x){ 
-					letterMatch = true;
-				}
+				if (inputLetter == x) letterMatch = true;
 			});
 			letterMatch ? gameObject.correctGuess(inputLetter) : gameObject.incorrectGuess(inputLetter);
 		}
@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 			gameObject.correctGuessArray = [];
 			gameObject.incorrectGuessArray = [];
-			correctGuess(" ");
 			writeToDOM(underscores, 'correctGuess');
 			correctGuess(" ");
 			writeToDOM(gameObject.incorrectGuessArray, 'incorrectGuess');
@@ -69,9 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		//Win condition
 		else {
 			gameOn = false;
-			console.log('you won');
 			document.getElementById('subtext').innerHTML = "Thank you for a very enjoyable game. Press the Enter key to restart the game.";
-			audioEnthusiasm.play();
+			selectRandomAudio([audioEnthusiasm]);
 		}
 	}
 
@@ -99,14 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const wordWin = () => {
 		gameObject.winBank.push(gameObject.currentWord);
-		writeToDOM(gameObject.winBank, 'wordBank')
+		writeToDOM(gameObject.winBank, 'wordBank');
 		gameObject.guessedLetters = [];
 		document.getElementById('score').innerHTML = gameObject.winBank.length;
 		document.getElementById('subtext').innerHTML = "New word. +2 guesses.";
 		gameObject.guessesRemaining += 2;
 		document.getElementById('guessesRemaining').innerHTML = gameObject.guessesRemaining;
 		randomSelectNextWord();
-		selectRandomAudio([audioWhatDoing, audioQuestion, audioStressPill]);
+		if (gameOn) selectRandomAudio([audioWhatDoing, audioQuestion, audioStressPill]);
 	}
 
 	const splitGuessedLetters = () => {
@@ -172,15 +170,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.addEventListener('keypress', (event) => {
 			const inputLetter = event.key.toString();
 			
-			if (gameOn) {
-				gameObject.doesLetterMatch(inputLetter.toLowerCase());
-			}
+			if (gameOn) gameObject.doesLetterMatch(inputLetter.toLowerCase());
 			//Restart game
 			else if (inputLetter == 'Enter') {
 				gameOn = true;
 				writeFunctionsToObject();
+				writeToDOM(gameObject.winBank, 'wordBank');
 				randomSelectNextWord();
-				audioFunctioning.play();
+				selectRandomAudio([audioFunctioning]);
+
 				document.getElementById('guessesRemaining').innerHTML = gameObject.guessesRemaining;
 				document.getElementById('subtext').innerHTML = "New game started.";
 			}
